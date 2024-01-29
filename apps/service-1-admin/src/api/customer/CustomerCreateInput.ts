@@ -1,4 +1,3 @@
-import { OrderCreateNestedManyWithoutCustomersInput } from "./OrderCreateNestedManyWithoutCustomersInput";
 import { AddressWhereUniqueInput } from "../address/AddressWhereUniqueInput";
 
 export type CustomerCreateInput = {
@@ -6,6 +5,5 @@ export type CustomerCreateInput = {
   lastName?: string | null;
   email?: string | null;
   phone?: string | null;
-  orders?: OrderCreateNestedManyWithoutCustomersInput;
   address?: AddressWhereUniqueInput | null;
 };

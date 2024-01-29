@@ -1,13 +1,10 @@
-import { Customer } from "../customer/Customer";
-import { Product } from "../product/Product";
-
 export type Order = {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | null;
+  updatedAt: Date | null;
   quantity: number | null;
   discount: number | null;
   totalPrice: number | null;
-  customer?: Customer | null;
-  product?: Product | null;
+  customerId: string | null;
+  productId: string | null;
 };

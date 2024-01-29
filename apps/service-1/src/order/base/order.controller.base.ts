@@ -47,21 +47,7 @@ export class OrderControllerBase {
   })
   async createOrder(@common.Body() data: OrderCreateInput): Promise<Order> {
     return await this.service.createOrder({
-      data: {
-        ...data,
-
-        customer: data.customer
-          ? {
-              connect: data.customer,
-            }
-          : undefined,
-
-        product: data.product
-          ? {
-              connect: data.product,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         id: true,
         createdAt: true,
@@ -69,18 +55,8 @@ export class OrderControllerBase {
         quantity: true,
         discount: true,
         totalPrice: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        customerId: true,
+        productId: true,
       },
     });
   }
@@ -108,18 +84,8 @@ export class OrderControllerBase {
         quantity: true,
         discount: true,
         totalPrice: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        customerId: true,
+        productId: true,
       },
     });
   }
@@ -148,18 +114,8 @@ export class OrderControllerBase {
         quantity: true,
         discount: true,
         totalPrice: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        customerId: true,
+        productId: true,
       },
     });
     if (result === null) {
@@ -189,21 +145,7 @@ export class OrderControllerBase {
     try {
       return await this.service.updateOrder({
         where: params,
-        data: {
-          ...data,
-
-          customer: data.customer
-            ? {
-                connect: data.customer,
-              }
-            : undefined,
-
-          product: data.product
-            ? {
-                connect: data.product,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           id: true,
           createdAt: true,
@@ -211,18 +153,8 @@ export class OrderControllerBase {
           quantity: true,
           discount: true,
           totalPrice: true,
-
-          customer: {
-            select: {
-              id: true,
-            },
-          },
-
-          product: {
-            select: {
-              id: true,
-            },
-          },
+          customerId: true,
+          productId: true,
         },
       });
     } catch (error) {
@@ -259,18 +191,8 @@ export class OrderControllerBase {
           quantity: true,
           discount: true,
           totalPrice: true,
-
-          customer: {
-            select: {
-              id: true,
-            },
-          },
-
-          product: {
-            select: {
-              id: true,
-            },
-          },
+          customerId: true,
+          productId: true,
         },
       });
     } catch (error) {

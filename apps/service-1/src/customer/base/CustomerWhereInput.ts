@@ -15,7 +15,6 @@ import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
 import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
 
 @InputType()
@@ -74,18 +73,6 @@ class CustomerWhereInput {
     nullable: true,
   })
   phone?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => OrderListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => OrderListRelationFilter)
-  @IsOptional()
-  @Field(() => OrderListRelationFilter, {
-    nullable: true,
-  })
-  orders?: OrderListRelationFilter;
 
   @ApiProperty({
     required: false,

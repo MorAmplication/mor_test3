@@ -13,7 +13,6 @@ import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsDate, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
-import { Order } from "../../order/base/Order";
 import { Address } from "../../address/base/Address";
 
 @ObjectType()
@@ -85,15 +84,6 @@ class Customer {
     nullable: true,
   })
   phone!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Order],
-  })
-  @ValidateNested()
-  @Type(() => Order)
-  @IsOptional()
-  orders?: Array<Order>;
 
   @ApiProperty({
     required: false,

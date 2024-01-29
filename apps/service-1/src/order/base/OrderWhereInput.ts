@@ -13,11 +13,11 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { IsOptional } from "class-validator";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 @InputType()
 class OrderWhereInput {
@@ -31,6 +31,28 @@ class OrderWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  createdAt?: DateTimeNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  updatedAt?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -67,27 +89,25 @@ class OrderWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => CustomerWhereUniqueInput,
+    type: StringNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => CustomerWhereUniqueInput)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => CustomerWhereUniqueInput, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  customer?: CustomerWhereUniqueInput;
+  customerId?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: () => ProductWhereUniqueInput,
+    type: StringNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => ProductWhereUniqueInput)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => ProductWhereUniqueInput, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  product?: ProductWhereUniqueInput;
+  productId?: StringNullableFilter;
 }
 
 export { OrderWhereInput as OrderWhereInput };
