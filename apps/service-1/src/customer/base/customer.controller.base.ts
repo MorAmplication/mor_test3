@@ -49,15 +49,7 @@ export class CustomerControllerBase {
     @common.Body() data: CustomerCreateInput
   ): Promise<Customer> {
     return await this.service.createCustomer({
-      data: {
-        ...data,
-
-        address: data.address
-          ? {
-              connect: data.address,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         id: true,
         createdAt: true,
@@ -66,12 +58,6 @@ export class CustomerControllerBase {
         lastName: true,
         email: true,
         phone: true,
-
-        address: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -100,12 +86,6 @@ export class CustomerControllerBase {
         lastName: true,
         email: true,
         phone: true,
-
-        address: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -135,12 +115,6 @@ export class CustomerControllerBase {
         lastName: true,
         email: true,
         phone: true,
-
-        address: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (result === null) {
@@ -170,15 +144,7 @@ export class CustomerControllerBase {
     try {
       return await this.service.updateCustomer({
         where: params,
-        data: {
-          ...data,
-
-          address: data.address
-            ? {
-                connect: data.address,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           id: true,
           createdAt: true,
@@ -187,12 +153,6 @@ export class CustomerControllerBase {
           lastName: true,
           email: true,
           phone: true,
-
-          address: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {
@@ -230,12 +190,6 @@ export class CustomerControllerBase {
           lastName: true,
           email: true,
           phone: true,
-
-          address: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {

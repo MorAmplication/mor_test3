@@ -1,6 +1,5 @@
 import { StringFilter } from "../../util/StringFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { AddressWhereUniqueInput } from "../address/AddressWhereUniqueInput";
 
 export type CustomerWhereInput = {
   id?: StringFilter;
@@ -8,5 +7,4 @@ export type CustomerWhereInput = {
   lastName?: StringNullableFilter;
   email?: StringNullableFilter;
   phone?: StringNullableFilter;
-  address?: AddressWhereUniqueInput;
 };

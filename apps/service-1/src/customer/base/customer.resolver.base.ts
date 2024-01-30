@@ -26,7 +26,6 @@ import { CustomerFindUniqueArgs } from "./CustomerFindUniqueArgs";
 import { CreateCustomerArgs } from "./CreateCustomerArgs";
 import { UpdateCustomerArgs } from "./UpdateCustomerArgs";
 import { DeleteCustomerArgs } from "./DeleteCustomerArgs";
-import { Address } from "../../address/base/Address";
 import { CustomerService } from "../customer.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Customer)
@@ -93,15 +92,7 @@ export class CustomerResolverBase {
   ): Promise<Customer> {
     return await this.service.createCustomer({
       ...args,
-      data: {
-        ...args.data,
-
-        address: args.data.address
-          ? {
-              connect: args.data.address,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -118,15 +109,7 @@ export class CustomerResolverBase {
     try {
       return await this.service.updateCustomer({
         ...args,
-        data: {
-          ...args.data,
-
-          address: args.data.address
-            ? {
-                connect: args.data.address,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -157,26 +140,5 @@ export class CustomerResolverBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Address, {
-    nullable: true,
-    name: "address",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "read",
-    possession: "any",
-  })
-  async getAddress(
-    @graphql.Parent() parent: Customer
-  ): Promise<Address | null> {
-    const result = await this.service.getAddress(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

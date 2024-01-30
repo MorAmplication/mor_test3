@@ -1,5 +1,3 @@
-import { Address } from "../address/Address";
-
 export type Customer = {
   id: string;
   createdAt: Date;
@@ -8,5 +6,4 @@ export type Customer = {
   lastName: string | null;
   email: string | null;
   phone: string | null;
-  address?: Address | null;
 };
