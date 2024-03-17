@@ -1,6 +1,5 @@
-import { ObjectType } from "@nestjs/graphql";
-
-@ObjectType()
-class EnumTest {}
-
-export { EnumTest as EnumTest };
+export enum EnumTest {
+    Yellow = "yellow",
+    Red = "red",
+    Green = "green"
+}
