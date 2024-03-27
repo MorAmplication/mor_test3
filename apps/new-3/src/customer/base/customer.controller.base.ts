@@ -62,12 +62,12 @@ export class CustomerControllerBase {
           : undefined,
       },
       select: {
+        email: true,
         id: true,
         createdAt: true,
         updatedAt: true,
         firstName: true,
         lastName: true,
-        email: true,
         phone: true,
 
         address: {
@@ -96,12 +96,12 @@ export class CustomerControllerBase {
     return this.service.customers({
       ...args,
       select: {
+        email: true,
         id: true,
         createdAt: true,
         updatedAt: true,
         firstName: true,
         lastName: true,
-        email: true,
         phone: true,
 
         address: {
@@ -131,12 +131,12 @@ export class CustomerControllerBase {
     const result = await this.service.customer({
       where: params,
       select: {
+        email: true,
         id: true,
         createdAt: true,
         updatedAt: true,
         firstName: true,
         lastName: true,
-        email: true,
         phone: true,
 
         address: {
@@ -183,12 +183,12 @@ export class CustomerControllerBase {
             : undefined,
         },
         select: {
+          email: true,
           id: true,
           createdAt: true,
           updatedAt: true,
           firstName: true,
           lastName: true,
-          email: true,
           phone: true,
 
           address: {
@@ -226,12 +226,12 @@ export class CustomerControllerBase {
       return await this.service.deleteCustomer({
         where: params,
         select: {
+          email: true,
           id: true,
           createdAt: true,
           updatedAt: true,
           firstName: true,
           lastName: true,
-          email: true,
           phone: true,
 
           address: {
