@@ -280,11 +280,7 @@ export class CustomerControllerBase {
           },
         },
 
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        productId: true,
       },
     });
     if (results === null) {

@@ -19,16 +19,14 @@ import {
 export class AddressServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
-  async count<T extends Prisma.AddressCountArgs>(
-    args: Prisma.SelectSubset<T, Prisma.AddressCountArgs>
-  ): Promise<number> {
+  async count(args: Omit<Prisma.AddressCountArgs, "select">): Promise<number> {
     return this.prisma.address.count(args);
   }
 
   async addresses<T extends Prisma.AddressFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.AddressFindManyArgs>
   ): Promise<PrismaAddress[]> {
-    return this.prisma.address.findMany(args);
+    return this.prisma.address.findMany<Prisma.AddressFindManyArgs>(args);
   }
   async address<T extends Prisma.AddressFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.AddressFindUniqueArgs>

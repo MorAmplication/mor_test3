@@ -10,27 +10,23 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-
 import {
   Prisma,
   Order as PrismaOrder,
   Customer as PrismaCustomer,
-  Product as PrismaProduct,
 } from "@prisma/client";
 
 export class OrderServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
-  async count<T extends Prisma.OrderCountArgs>(
-    args: Prisma.SelectSubset<T, Prisma.OrderCountArgs>
-  ): Promise<number> {
+  async count(args: Omit<Prisma.OrderCountArgs, "select">): Promise<number> {
     return this.prisma.order.count(args);
   }
 
   async orders<T extends Prisma.OrderFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.OrderFindManyArgs>
   ): Promise<PrismaOrder[]> {
-    return this.prisma.order.findMany(args);
+    return this.prisma.order.findMany<Prisma.OrderFindManyArgs>(args);
   }
   async order<T extends Prisma.OrderFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.OrderFindUniqueArgs>
@@ -59,13 +55,5 @@ export class OrderServiceBase {
         where: { id: parentId },
       })
       .customer();
-  }
-
-  async getProduct(parentId: string): Promise<PrismaProduct | null> {
-    return this.prisma.order
-      .findUnique({
-        where: { id: parentId },
-      })
-      .product();
   }
 }
