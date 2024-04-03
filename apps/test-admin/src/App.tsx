@@ -5,14 +5,10 @@ import { theme } from "./theme/theme";
 import Login from "./Login";
 import "./App.scss";
 import Dashboard from "./pages/Dashboard";
-import { UserList } from "./user/UserList";
-import { UserCreate } from "./user/UserCreate";
-import { UserEdit } from "./user/UserEdit";
-import { UserShow } from "./user/UserShow";
-import { DoctorList } from "./doctor/DoctorList";
-import { DoctorCreate } from "./doctor/DoctorCreate";
-import { DoctorEdit } from "./doctor/DoctorEdit";
-import { DoctorShow } from "./doctor/DoctorShow";
+import { ProductList } from "./product/ProductList";
+import { ProductCreate } from "./product/ProductCreate";
+import { ProductEdit } from "./product/ProductEdit";
+import { ProductShow } from "./product/ProductShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -40,18 +36,11 @@ const App = (): React.ReactElement => {
         loginPage={Login}
       >
         <Resource
-          name="User"
-          list={UserList}
-          edit={UserEdit}
-          create={UserCreate}
-          show={UserShow}
-        />
-        <Resource
-          name="Doctor"
-          list={DoctorList}
-          edit={DoctorEdit}
-          create={DoctorCreate}
-          show={DoctorShow}
+          name="Product"
+          list={ProductList}
+          edit={ProductEdit}
+          create={ProductCreate}
+          show={ProductShow}
         />
       </Admin>
     </div>
