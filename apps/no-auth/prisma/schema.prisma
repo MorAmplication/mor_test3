@@ -1,0 +1,23 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Mor {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+  vikas     Vika[]
+}
+
+model Vika {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  mor       Mor?     @relation(fields: [morId], references: [id])
+  morId     String?
+  updatedAt DateTime @updatedAt
+}
