@@ -1,12 +1,11 @@
-import { Module, forwardRef } from "@nestjs/common";
-import { AuthModule } from "../auth/auth.module";
+import { Module } from "@nestjs/common";
 import { VikaModuleBase } from "./base/vika.module.base";
 import { VikaService } from "./vika.service";
 import { VikaController } from "./vika.controller";
 import { VikaResolver } from "./vika.resolver";
 
 @Module({
-  imports: [VikaModuleBase, forwardRef(() => AuthModule)],
+  imports: [VikaModuleBase],
   controllers: [VikaController],
   providers: [VikaService, VikaResolver],
   exports: [VikaService],
