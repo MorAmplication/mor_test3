@@ -1,6 +1,4 @@
 import { Module } from "@nestjs/common";
-import { MorModule } from "./mor/mor.module";
-import { VikaModule } from "./vika/vika.module";
 import { UserModule } from "./user/user.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
@@ -14,8 +12,6 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 @Module({
   controllers: [],
   imports: [
-    MorModule,
-    VikaModule,
     UserModule,
     HealthModule,
     PrismaModule,
