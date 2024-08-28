@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { VikaService } from "../vika.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { VikaCreateInput } from "./VikaCreateInput";
 import { Vika } from "./Vika";
 import { VikaFindManyArgs } from "./VikaFindManyArgs";
 import { VikaWhereUniqueInput } from "./VikaWhereUniqueInput";
 import { VikaUpdateInput } from "./VikaUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class VikaControllerBase {
-  constructor(protected readonly service: VikaService) {}
+  constructor(
+    protected readonly service: VikaService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Vika })
+  @nestAccessControl.UseRoles({
+    resource: "Vika",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createVika(@common.Body() data: VikaCreateInput): Promise<Vika> {
     return await this.service.createVika({
       data: {
@@ -53,9 +71,18 @@ export class VikaControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Vika] })
   @ApiNestedQuery(VikaFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Vika",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async vikas(@common.Req() request: Request): Promise<Vika[]> {
     const args = plainToClass(VikaFindManyArgs, request.query);
     return this.service.vikas({
@@ -75,9 +102,18 @@ export class VikaControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Vika })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Vika",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async vika(
     @common.Param() params: VikaWhereUniqueInput
   ): Promise<Vika | null> {
@@ -104,9 +140,18 @@ export class VikaControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Vika })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Vika",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateVika(
     @common.Param() params: VikaWhereUniqueInput,
     @common.Body() data: VikaUpdateInput
@@ -149,6 +194,14 @@ export class VikaControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Vika })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Vika",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteVika(
     @common.Param() params: VikaWhereUniqueInput
   ): Promise<Vika | null> {
