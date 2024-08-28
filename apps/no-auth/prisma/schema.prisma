@@ -18,3 +18,21 @@ model User {
   updatedAt DateTime @updatedAt
   username  String   @unique
 }
+
+model Organization {
+  calendar   Calendar?  @relation(name: "CalendarOnOrganizations", fields: [calendarId], references: [id])
+  calendarId String?
+  calendars  Calendar[] @relation(name: "CalendarsOnOrganization")
+  createdAt  DateTime   @default(now())
+  id         String     @id @default(cuid())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Calendar {
+  createdAt      DateTime       @default(now())
+  id             String         @id @default(cuid())
+  organization   Organization?  @relation(name: "CalendarsOnOrganization", fields: [organizationId], references: [id])
+  organizationId String?
+  organizations  Organization[] @relation(name: "CalendarOnOrganizations")
+  updatedAt      DateTime       @updatedAt
+}
