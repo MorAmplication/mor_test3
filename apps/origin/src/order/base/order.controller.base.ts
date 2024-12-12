@@ -55,12 +55,6 @@ export class OrderControllerBase {
               connect: data.customer,
             }
           : undefined,
-
-        product: data.product
-          ? {
-              connect: data.product,
-            }
-          : undefined,
       },
       select: {
         id: true,
@@ -76,11 +70,7 @@ export class OrderControllerBase {
           },
         },
 
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        productId: true,
       },
     });
   }
@@ -115,11 +105,7 @@ export class OrderControllerBase {
           },
         },
 
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        productId: true,
       },
     });
   }
@@ -155,11 +141,7 @@ export class OrderControllerBase {
           },
         },
 
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        productId: true,
       },
     });
     if (result === null) {
@@ -197,12 +179,6 @@ export class OrderControllerBase {
                 connect: data.customer,
               }
             : undefined,
-
-          product: data.product
-            ? {
-                connect: data.product,
-              }
-            : undefined,
         },
         select: {
           id: true,
@@ -218,11 +194,7 @@ export class OrderControllerBase {
             },
           },
 
-          product: {
-            select: {
-              id: true,
-            },
-          },
+          productId: true,
         },
       });
     } catch (error) {
@@ -266,11 +238,7 @@ export class OrderControllerBase {
             },
           },
 
-          product: {
-            select: {
-              id: true,
-            },
-          },
+          productId: true,
         },
       });
     } catch (error) {

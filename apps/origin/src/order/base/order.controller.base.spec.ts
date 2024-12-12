@@ -24,6 +24,7 @@ const CREATE_INPUT = {
   quantity: 42,
   discount: 42.42,
   totalPrice: 42,
+  productId: "exampleProductId",
 };
 const CREATE_RESULT = {
   id: "exampleId",
@@ -32,6 +33,7 @@ const CREATE_RESULT = {
   quantity: 42,
   discount: 42.42,
   totalPrice: 42,
+  productId: "exampleProductId",
 };
 const FIND_MANY_RESULT = [
   {
@@ -41,6 +43,7 @@ const FIND_MANY_RESULT = [
     quantity: 42,
     discount: 42.42,
     totalPrice: 42,
+    productId: "exampleProductId",
   },
 ];
 const FIND_ONE_RESULT = {
@@ -50,6 +53,7 @@ const FIND_ONE_RESULT = {
   quantity: 42,
   discount: 42.42,
   totalPrice: 42,
+  productId: "exampleProductId",
 };
 
 const service = {
